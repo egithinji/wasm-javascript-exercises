@@ -16,7 +16,7 @@ jobs:
         working-directory: exercise1/rust
 
       - name: Set up PostgreSQL client
-        uses: docker://postgres:latest
+        run: apt-get update && apt-get install -y postgresql-client
 
       - name: Write data to DB
         if: success()
