@@ -14,14 +14,17 @@ jobs:
       - run: wasm-pack test --node
         working-directory: exercise3
 
-      - name: Set up  and start PostgreSQL client
+  write_to_db: 
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Install postgresql
         run: |
           sudo apt update
           sudo apt install postgresql postgresql-contrib
           sudo systemctl start postgresql.service
 
       - name: Write data to DB
-        #if: success()
         env:
           PGHOST: ${{ secrets.PGHOST }}
           PGPORT: ${{ secrets.PGPORT }}
@@ -29,5 +32,5 @@ jobs:
           PGPASSWORD: ${{ secrets.PGPASSWORD }}
           PGDATABASE: ${{ secrets.PGDATABASE }}
         run: |
-          echo Extracting the team name from the branch name and inserting into db
-          psql -c "INSERT INTO scoreboard (team, exercise) VALUES ('${GITHUB_REF##*/}',3) ON CONFLICT DO NOTHING;" 
+          echo Writing team name and exercise to db
+          psql -c "INSERT INTO scoreboard (team, exercise) VALUES ('${GITHUB_REF##*/}',3) ON CONFLICT DO NOTHING;"    
