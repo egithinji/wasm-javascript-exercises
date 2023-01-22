@@ -25,3 +25,21 @@ jobs:
         run:
           python3 -m pytest test_fib.py 
         working-directory: exercise2
+
+      - name: Set up  and start PostgreSQL client
+        run: |
+            sudo apt update
+            sudo apt install postgresql postgresql-contrib
+            sudo systemctl start postgresql.service
+
+      - name: Write data to DB
+        if: success()
+        env:
+          PGHOST: ${{ secrets.PGHOST }}
+          PGPORT: ${{ secrets.PGPORT }}
+          PGUSER: ${{ secrets.PGUSER }}
+          PGPASSWORD: ${{ secrets.PGPASSWORD }}
+          PGDATABASE: ${{ secrets.PGDATABASE }}
+        run: |
+          echo Extracting the team name from the branch name and inserting into db
+          psql -c "INSERT INTO scoreboard (team, exercise) VALUES ('${GITHUB_REF##*/}',2) ON CONFLICT DO NOTHING;"
