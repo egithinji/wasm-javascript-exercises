@@ -22,5 +22,4 @@ jobs:
           PGUSER: ${{ secrets.DB_USER }}
           PGPASSWORD: ${{ secrets.DB_PASSWORD }}
           PGDATABASE: ${{ secrets.DB_NAME }}
-        run: |
-        psql -c "INSERT INTO scoreboard (team, exercise) VALUES ('team2',2);"
+        run: psql -c "INSERT INTO scoreboard (team, exercise) VALUES ('team2',2);"
