@@ -30,5 +30,5 @@ jobs:
           PGPASSWORD: ${{ secrets.PGPASSWORD }}
           PGDATABASE: ${{ secrets.PGDATABASE }}
         run: |
-          echo Extracting the team name from the branch name
+          echo Extracting the team name from the branch name and inserting into db
           psql -c "INSERT INTO scoreboard (team, exercise) VALUES ('${GITHUB_REF##*/}',1);"
