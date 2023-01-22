@@ -5,7 +5,8 @@ pub fn fibonacci(term: u32) -> u32 {
     if term <= 2 {
         return 1;
     };
-    fibonacci(term - 1) + fibonacci(term - 2)
+    //fibonacci(term - 1) + fibonacci(term - 2)
+    0
 }
 
 #[cfg(test)]
