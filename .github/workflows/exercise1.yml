@@ -14,11 +14,12 @@ jobs:
           override: true
       - run: cargo test
         working-directory: exercise1/rust
+
+      - name: Set up PostgreSQL client
+        uses: docker://postgres:latest
+
       - name: Write data to DB
         if: success()
-        steps:
-        - name: Set up PostgreSQL client
-          uses: docker://postgres:latest
         env:
           PGHOST: ${{ secrets.DB_HOST }}
           PGPORT: ${{ secrets.DB_PORT }}
