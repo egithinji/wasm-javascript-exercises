@@ -1,5 +1,5 @@
-function fibonacciJS(term) {
-    if (term <= 2) return 1;
-    return fibonacciJS(term-1) + fibonacciJS(term-2);
+function fibonacci(term) {
+    // TODO: Add code here
 }
-module.exports = fibonacciJS
+
+export default fibonacci

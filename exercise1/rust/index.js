@@ -1,3 +1,3 @@
-const { fibonacci } = require('./pkg/');
+import { fibonacci } from './pkg'
 
-module.exports = fibonacci;
+export default fibonacci;
