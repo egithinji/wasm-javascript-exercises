@@ -45,4 +45,4 @@ jobs:
           PGDATABASE: ${{ secrets.PGDATABASE }}
         run: |
           echo Writing team name and exercise to db
-          psql -c "INSERT INTO scoreboard (team, exercise) VALUES ('${GITHUB_REF##*/}',2) ON CONFLICT DO NOTHING;" 
+          psql -c "INSERT INTO scoreboard (team, exercise_id) VALUES ('${GITHUB_REF##*/}',2) ON CONFLICT DO NOTHING;" 
